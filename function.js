@@ -46,7 +46,7 @@ searchBarForm.addEventListener("submit", async (event) => {
  // this for 3-day forecast const url = `http://api.weatherapi.com/v1/forecast.json?q=${city}&key=5d88cfd5846743c1b27184227240306&days=3` // make sure to add https://
   
   
-  const url = `http://api.weatherapi.com/v1/forecast.json?q=${city}&key=5d88cfd5846743c1b27184227240306&days=3` //
+  const url = `https://api.weatherapi.com/v1/forecast.json?q=${city}&key=5d88cfd5846743c1b27184227240306&days=3` //
     const response = await fetch(url);
     searchBar.value =  `${city}`;
     console.log(response);
