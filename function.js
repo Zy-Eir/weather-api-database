@@ -2,7 +2,7 @@ const searchBarForm = document.querySelector(".search-bar-form");
 const searchBar = document.querySelector(".search-bar");
 const displayArea = document.querySelector(".display-area");
 const card = document.querySelector(".card");
-
+const forecastArea = document.querySelector(".forecast-area");
 
 
 
@@ -57,30 +57,75 @@ searchBarForm.addEventListener("submit", async (event) => {
 
     return await response.json();
   
+    
 }  
 
 function displayWeatherData(data){
   
-  console.log(data);
-
-
-
-  let { current:  {feelslike_f, condition: {code, icon, text}},
-          location: {name, region},
-          forecast: {forecastday: [{day: {avgtemp_f, maxtemp_f, mintemp_f, daily_chance_of_rain}, hour: {temp_f}}]}
-        } = data; 
-  
-       
-
-  /*  this is for 3 day forecast functionality
-
-  const {location: {name},
-         forecast:  {forecastday: [{day: {avgtemp_f}}]}
-        } = data; 
+    console.log(data);
 
  
- */
+  let {   current:  {feelslike_f, condition: {code, icon, text}},
+            location: {name, region},
+            forecast: {forecastday: [{day: {avgtemp_f,  maxtemp_f, mintemp_f, daily_chance_of_rain}, hour: {temp_f}}]}
+    } = data;  
   
+    forecastArea.innerHTML=''; // clears previous search results
+
+
+    data.forecast.forecastday.forEach((forecastdays) => { 
+      
+   //  const date = forecastdays.date;
+
+     // const minmaxTemp =  document.createElement("p");
+     // minmaxTemp.classList.add("minmax");
+     // minmaxTemp.textContent = "Low: " + `${mintemp_f.toFixed(0)}°F` +  " High: " + `${maxtemp_f.toFixed(0)}°F`;
+
+ 
+   
+
+    let forecastCards = document.createElement("div");
+    forecastCards.classList.add("forecast-cards");
+
+   
+
+    const date = document.createElement("p");
+     date.textContent = forecastdays.date;
+     
+     
+     const minmaxTemp =  document.createElement("p");
+     minmaxTemp.classList.add("forecast-minmax");
+     minmaxTemp.textContent =  forecastdays.day.mintemp_f.toFixed(0) + "°" +  " / " + forecastdays.day.maxtemp_f.toFixed(0) + "°";
+ 
+     const forecastDailyRain = document.createElement("p");
+     forecastDailyRain.classList.add("minmax");
+     forecastDailyRain.textContent = "☔" + forecastdays.day.daily_chance_of_rain + "%";
+
+     forecastDayIcon = document.createElement("p");
+     forecastDayIcon.classList.add("forecast-icon");
+     forecastDayIcon.textContent = getWeatherEmoji(code);
+
+     rainAndIcon = document.createElement("div");
+     rainAndIcon.classList.add("rain-and-weather-icon");
+     forecastDailyRain.classList.add("group");
+
+     rainAndIcon.append(forecastDailyRain, forecastDayIcon)
+    
+    forecastCards.append(date, rainAndIcon, minmaxTemp);
+
+     
+
+    forecastArea.append(forecastCards);
+      
+    
+   
+     
+    });
+  
+  
+   
+
+
         
  
 
@@ -104,7 +149,7 @@ function displayWeatherData(data){
 
   const cityCurrentTemp =  document.createElement("h1");
   cityCurrentTemp.classList.add("current-temp");
-  cityCurrentTemp.textContent = `${avgtemp_f.toFixed(0)}°F`;
+  cityCurrentTemp.textContent = `${avgtemp_f.toFixed(0)}°`;
 
   const weatherIcon =  document.createElement("p");
   weatherIcon.classList.add("weather-emoji");
@@ -120,17 +165,18 @@ function displayWeatherData(data){
 
   const minmaxTemp =  document.createElement("p");
   minmaxTemp.classList.add("minmax");
-  minmaxTemp.textContent = `${mintemp_f.toFixed(0)}°F` + " / " + `${maxtemp_f.toFixed(0)}°F`;
+  minmaxTemp.textContent = `${mintemp_f.toFixed(0)}°` + " / " + `${maxtemp_f.toFixed(0)}°`;
 
 
   const feelsLike =  document.createElement("p");
   feelsLike.classList.add("feels-like");
-  feelsLike.textContent = `${feelslike_f.toFixed(0)}°F`;
+  feelsLike.textContent = "Feels like " + `${feelslike_f.toFixed(0)}°`;
 
   
   const rainPercentage =  document.createElement("p");
   rainPercentage.classList.add("rain-percentage");
-  rainPercentage.textContent = "Rain chance: " +`${daily_chance_of_rain}%`;
+  rainPercentage.textContent = "Rain chance: " + `${daily_chance_of_rain}%`;
+
 
 
   const weatherDesc =  document.createElement("p");
@@ -138,8 +184,10 @@ function displayWeatherData(data){
   weatherDesc.textContent = `${text}`;
 
   const currentWeatherDescWrapper =  document.createElement("div");
-  currentWeatherDescWrapper.classList.add("feels-like-wrap");
-  currentWeatherDescWrapper.append(weatherDesc, minmaxTemp, feelsLike);
+  currentWeatherDescWrapper.classList.add("weather-lo-high");
+
+
+  currentWeatherDescWrapper.append(weatherDesc, minmaxTemp, feelsLike, rainPercentage);
   
 
  // currentTempEmojiWrap.append(cityCurrentTemp);
@@ -147,7 +195,7 @@ function displayWeatherData(data){
  // cityExtraInfoWrap.append(cityDesc, highLow, cityFeels);
 
   
-  card.append( cityName, currentTempIconWrap, currentWeatherDescWrapper, rainPercentage);
+  card.append( cityName, currentTempIconWrap, currentWeatherDescWrapper);
 
  
 
