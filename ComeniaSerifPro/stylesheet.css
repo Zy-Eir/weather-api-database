@@ -1,0 +1,48 @@
+@font-face {
+    font-family: 'Comenia Serif Pro';
+    src: url('ComeniaSerifPro-Italic.eot');
+    src: local('ComeniaSerifPro-Italic'),
+        url('ComeniaSerifPro-Italic.eot?#iefix') format('embedded-opentype'),
+        url('ComeniaSerifPro-Italic.woff2') format('woff2'),
+        url('ComeniaSerifPro-Italic.woff') format('woff'),
+        url('ComeniaSerifPro-Italic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Comenia Serif Pro';
+    src: url('ComeniaSerifPro.eot');
+    src: local('ComeniaSerifPro'),
+        url('ComeniaSerifPro.eot?#iefix') format('embedded-opentype'),
+        url('ComeniaSerifPro.woff2') format('woff2'),
+        url('ComeniaSerifPro.woff') format('woff'),
+        url('ComeniaSerifPro.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Comenia Serif Pro';
+    src: url('ComeniaSerifPro-BoldItalic.eot');
+    src: local('ComeniaSerifPro-BoldItalic'),
+        url('ComeniaSerifPro-BoldItalic.eot?#iefix') format('embedded-opentype'),
+        url('ComeniaSerifPro-BoldItalic.woff2') format('woff2'),
+        url('ComeniaSerifPro-BoldItalic.woff') format('woff'),
+        url('ComeniaSerifPro-BoldItalic.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Comenia Serif Pro';
+    src: url('ComeniaSerifPro-Bold.eot');
+    src: local('ComeniaSerifPro-Bold'),
+        url('ComeniaSerifPro-Bold.eot?#iefix') format('embedded-opentype'),
+        url('ComeniaSerifPro-Bold.woff2') format('woff2'),
+        url('ComeniaSerifPro-Bold.woff') format('woff'),
+        url('ComeniaSerifPro-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
